@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>EasySocket</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <p:growl widgetVar="g" />
+            <h:form id="form">
+                <h:panelGrid columns="2">
+                    
+                    <h:outputText value="Message:"/>
+                    <p:inputText id="txtMessage" value="#{easySocketBean.message}"/>
+                    <p:commandButton action="#{easySocketBean.pushToClients()}" value="Push"/>    
+                </h:panelGrid>
+                
+                <p:dialog/>
+            </h:form>
+            <!-->Do not forget to replace API_KEY with youry actual apikey or simply reploce this script tag with you workspace script <-->
+            <script class="esocketjs" type="text/javascript" src="http://api.easysocket.io/easysocket.js?apiKey=API_KEY&amp;callback=usesocket"></script>
+         <script>
+             //callback metod name by default "usesocket"
+             function usesocket(){
+             esocket.on('push',function(data)
+             {
+                 console.log(data);
+                 g.renderMessage({summary:'Push Message', detail:data.data, severity: 0});
+             });
+            };
+         </script>
+
+        </h:body>
+
+    </f:view>
+</html>
+
