@@ -32,12 +32,13 @@ public class EasySocketBean  {
             String url = "http://api.easysocket.io";
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            
+            //Please do not forget to assign your private key            
+            String privateKey="";
             //add reuqest header
             con.setRequestMethod("POST");
             con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-            //Please do not forget to replace API_KEY and PRIVATE_KEY with your actual api key and private key            
-            String urlParameters = "apiKey=API_KEY&method=push&privateKey=PRIVATE_KEY&data="+this.message;
+            
+            String urlParameters = "privateKey="+privateKey+"&method=push&data="+this.message;
             
             // Send post request
             con.setDoOutput(true);
